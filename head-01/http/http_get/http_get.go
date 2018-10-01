@@ -11,5 +11,4 @@ func main() {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println(string(body))
 	resp.Body.Close()
-
 }
