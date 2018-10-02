@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Names() (first string, second string) {
+func Names() (first, second string) {
 	first = "Foo"
 	second = "Bar"
 	return
