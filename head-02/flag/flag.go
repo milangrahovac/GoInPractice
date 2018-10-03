@@ -6,8 +6,8 @@ import (
 )
 
 var name = flag.String("name", "World", "A name to say hello to.")
-var spanish bool
 var russian bool
+var spanish bool
 
 func init() {
 	flag.BoolVar(&russian, "russian", false, "Use russian language.")
