@@ -15,7 +15,7 @@ func main() {
 	}{}
 	err := gcfg.ReadFileInto(&config, "conf.ini")
 	if err != nil {
-		fmt.Println("Falied to parse config file: %s.", err)
+		fmt.Printf("Falied to parse config file: %s.\n", err)
 	}
 	fmt.Println(config.Section.Enabled)
 	fmt.Println(config.Section.Path)
