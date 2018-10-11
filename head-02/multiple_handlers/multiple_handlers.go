@@ -31,3 +31,11 @@ func goodbuy(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintln(w, "Goodbuy ", name)
 }
+
+func homePage(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+	fmt.Fprintln(w, "The homepage!")
+}
