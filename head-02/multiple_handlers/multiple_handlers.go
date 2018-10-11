@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -18,5 +19,15 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = "Inigo Montoya"
 	}
-	fmt.Fprint(w, "Hello, my name is ", name)
+	fmt.Fprintln(w, "Hello, my name is ", name)
+}
+
+func goodbuy(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path
+	parts := strings.Split(path, "/")
+	name := parts[2]
+	if name == "" {
+		name = "Inigo Montoya"
+	}
+	fmt.Fprintln(w, "Goodbuy ", name)
 }
