@@ -14,7 +14,7 @@ type pathResolver struct {
 func main() {
 	pr := newPathResolver()
 	pr.Add("GET /hello", hello)
-	pr.Add("* /goodbye*", goodbye)
+	pr.Add("* /goodbye/*", goodbye)
 	http.ListenAndServe(":8080", pr)
 
 }
