@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"path"
+	"strings"
 )
 
 type pathResolver struct {
@@ -14,7 +15,7 @@ func main() {
 	fmt.Println("hello world")
 	pr := newPathResolver()
 	pr.Add("GET /hello", hello)
-	pr.Add("* /goodbuy*", goodbuy)
+	pr.Add("* /goodbuy*", goodbye)
 
 }
 
@@ -37,4 +38,23 @@ func (p *pathResolver) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		}
 	}
 	http.NotFound(res, req)
+}
+
+func hello(res http.ResponseWriter, req http.Request) {
+	query := req.URL.Query()
+	name := query.Get("name")
+	if name == "" {
+		name = "Inigo Montoya"
+	}
+	fmt.Fprintln(res, "Hello my name is ", name)
+}
+
+func goodbye(res http.ResponseWriter, req http.Request) {
+	path := req.URL.Path
+	parts := strings.Split(path, "/")
+	name := parts[2]
+	if name == "" {
+		name = "Inigo Montoya"
+	}
+	fmt.Fprintln(res, "Goodbye", name)
 }
