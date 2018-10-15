@@ -16,6 +16,7 @@ func main() {
 	pr := newPathResolver()
 	pr.Add("GET /hello", hello)
 	pr.Add("* /goodbuy*", goodbye)
+	http.ListenAndServe(":8080", pr)
 
 }
 
@@ -40,7 +41,7 @@ func (p *pathResolver) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	http.NotFound(res, req)
 }
 
-func hello(res http.ResponseWriter, req http.Request) {
+func hello(res http.ResponseWriter, req *http.Request) {
 	query := req.URL.Query()
 	name := query.Get("name")
 	if name == "" {
@@ -49,7 +50,7 @@ func hello(res http.ResponseWriter, req http.Request) {
 	fmt.Fprintln(res, "Hello my name is ", name)
 }
 
-func goodbye(res http.ResponseWriter, req http.Request) {
+func goodbye(res http.ResponseWriter, req *http.Request) {
 	path := req.URL.Path
 	parts := strings.Split(path, "/")
 	name := parts[2]
