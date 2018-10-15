@@ -8,7 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/goodbuy/", goodbuy)
+	http.HandleFunc("/goodbye/", goodbye)
 	http.HandleFunc("/", homePage)
 	http.ListenAndServe(":8080", nil)
 }
@@ -22,14 +22,14 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello, my name is ", name)
 }
 
-func goodbuy(w http.ResponseWriter, r *http.Request) {
+func goodbye(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	parts := strings.Split(path, "/")
 	name := parts[2]
 	if name == "" {
 		name = "Inigo Montoya"
 	}
-	fmt.Fprintln(w, "Goodbuy ", name)
+	fmt.Fprintln(w, "Goodbye ", name)
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {

@@ -12,10 +12,9 @@ type pathResolver struct {
 }
 
 func main() {
-	fmt.Println("hello world")
 	pr := newPathResolver()
 	pr.Add("GET /hello", hello)
-	pr.Add("* /goodbuy*", goodbye)
+	pr.Add("* /goodbye*", goodbye)
 	http.ListenAndServe(":8080", pr)
 
 }
