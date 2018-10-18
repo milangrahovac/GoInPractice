@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"strings"
 )
 
 type regexResolver struct {
@@ -49,4 +50,17 @@ func hello(res http.ResponseWriter, req *http.Request) {
 		name = "Inigo Montoya"
 	}
 	fmt.Fprintln(res, "Hello, my name is ", name)
+}
+
+func goodbye(res http.ResponseWriter, req *http.Request) {
+	path := req.URL.Path
+	parts := strings.Split(path, "/")
+	name := ""
+	if len(parts) > 2 {
+		name = parts[2]
+	}
+	if name == "" {
+		name = "Inigo Montoya"
+	}
+	fmt.Fprintln(res, "Goodbye ", name)
 }
