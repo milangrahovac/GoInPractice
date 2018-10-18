@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"regexp"
 )
@@ -39,4 +40,13 @@ func (r *regexResolver) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		}
 	}
 	http.NotFound(res, req)
+}
+
+func hello(res http.ResponseWriter, req *http.Request) {
+	query := req.URL.Query()
+	name := query.Get("name")
+	if name == "" {
+		name = "Inigo Montoya"
+	}
+	fmt.Fprintln(res, "Hello, my name is ", name)
 }
