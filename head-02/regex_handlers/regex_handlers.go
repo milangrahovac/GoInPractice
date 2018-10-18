@@ -23,3 +23,9 @@ func newPathResolver() *regexResolver {
 		cache:    make(map[string]*regexp.Regexp),
 	}
 }
+
+func (r *regexResolver) Add(regex string, handler http.HandlerFunc) {
+	r.handlers[regex] = handler
+	cache, _ := regexp.Compile[regex]
+	r.cache[regex] = cache
+}
