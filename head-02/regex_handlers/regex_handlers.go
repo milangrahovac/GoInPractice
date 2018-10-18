@@ -29,3 +29,14 @@ func (r *regexResolver) Add(regex string, handler http.HandlerFunc) {
 	cache, _ := regexp.Compile[regex]
 	r.cache[regex] = cache
 }
+
+func (r *regexResolver) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	check := req.Method + " " + req.URL.Path
+	for pattern, handlerFunc := range r.handlers {
+		if r.cache[pattern].MatchString(check) == true {
+			handlerFunc(res, req)
+			return
+		}
+	}
+	http.NotFound(res, req)
+}
