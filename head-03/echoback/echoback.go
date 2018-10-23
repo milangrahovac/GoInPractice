@@ -10,7 +10,7 @@ import (
 func main() {
 	go echo(os.Stdin, os.Stdin)
 	time.Sleep(30 * time.Second)
-	fmt.Println("Time out")
+	fmt.Println("Time out.")
 	os.Exit(0)
 }
 
