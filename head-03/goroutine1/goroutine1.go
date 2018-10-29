@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 )
 
 func main() {
@@ -9,5 +10,6 @@ func main() {
 	go func() {
 		fmt.Println("Inside goroutine!")
 	}()
-
+	fmt.Println("Outside again!")
+	runtime.Gosched()
 }
