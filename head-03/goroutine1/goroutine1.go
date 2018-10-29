@@ -6,8 +6,8 @@ import (
 
 func main() {
 	fmt.Println("Outside goroutine!")
-	go func(){
+	go func() {
 		fmt.Println("Inside goroutine!")
-	}
+	}()
 
 }
