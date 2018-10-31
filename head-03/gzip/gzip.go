@@ -15,4 +15,10 @@ func compress(filename string) error {
 	if err != nil {
 		return nil
 	}
+	defer in.Close()
+
+	out, err := os.Create(filename + ".qz")
+	if err != nil {
+		return err
+	}
 }
