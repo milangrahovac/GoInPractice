@@ -9,3 +9,10 @@ func main() {
 		compress(file)
 	}
 }
+
+func compress(filename string) error {
+	in, err := os.Open(filename)
+	if err != nil {
+		return nil
+	}
+}
