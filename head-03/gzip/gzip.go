@@ -1,6 +1,8 @@
 package main
 
 import (
+	"compress/gzip"
+	"io"
 	"os"
 )
 
@@ -21,4 +23,10 @@ func compress(filename string) error {
 	if err != nil {
 		return err
 	}
+	defer out.Close()
+
+	gzout := gzip.NewWriter(out)
+	_, err = io.Copy(gzout, in)
+	gzout.Close()
+	return err
 }
